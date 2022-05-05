@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id','desc')->limit(20)->get();
+        $posts = Post::with(['category','tags'])->orderBy('id','desc')->limit(20)->get();
         return view('admin.posts.index',compact('posts'));
     }
 
@@ -77,7 +78,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit',compact('post','categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit',compact('post','categories','tags'));
     }
 
     /**
@@ -94,16 +96,22 @@ class PostController extends Controller
             'content' => 'required|string',
             'published_at' => 'nullable|date',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ]);
         
         $data = $request->all();
-        
+    
         if($post->title != $data['title']){
             $slug = Post::getUniqueSlug($data['title']);
             $data['slug'] = $slug;
         }
         
-        
+        if(array_key_exists('tags',$data)){
+            $post->tags()->sync($data['tags']);
+        }else{
+            $post->tags()->sync([]);
+        }
+
         $post->update($data);
         
         return redirect()->route('admin.posts.index');

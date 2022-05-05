@@ -38,6 +38,16 @@
                     @enderror
                   </div>
 
+                  <label class="d-block">Tags:</label>
+                  <div class="form-group form-check form-check-inline ">
+                  @foreach($tags as $tag)
+                    <input class="form-check-input" {{ $post->tags->contains($tag) ? 'checked' : '' }} type="checkbox" name="tags[]" id="tags-{{$tag->id}}" value="{{$tag->id}}">
+                    <label class="form-check-label mr-4" for="{{$tag->id}}">{{ $tag->name }}</label>
+                  @endforeach
+                  </div>
+                  
+                  
+
                   <div class="form-group mb-3">
                     <label for="content" class="form-label">Content*</label>
                     <textarea class="form-control @error ('content') is-invalid @enderror" name="content" id="content">{{$post->content}}</textarea>

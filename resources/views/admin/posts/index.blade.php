@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-xxl">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
@@ -37,6 +37,7 @@
                 <th>Titolo</th> 
                 <th>Slug</th>
                 <th>Categoria</th>
+                <th>Tag</th>
                 <th>Data di pubblicazione</th>
                 <th></th> 
               </thead> 
@@ -48,6 +49,11 @@
                     <td>{{$post->title}}</td> 
                     <td>{{$post->slug}}</td> 
                     <td>{{ $post->category ? $post->category->name : "-" }}</td>
+                    <td>
+                    @foreach ($post->tags as $tag )
+                        <span class="badge rounded-pill bg-info text-light">{{ $tag->name }}</span>
+                    @endforeach
+                    </td>
                     <td>{{Str::substr($post->published_at, 0, 10)}}</td> 
                     <td><a class="btn btn-success" href="{{route('admin.posts.edit',$post)}}">Modifica</a></td>
                     <td>
