@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\User;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 class PostSeeder extends Seeder
@@ -19,6 +20,8 @@ class PostSeeder extends Seeder
         $categoriesId = $categories->pluck('id')->all();
         $tags = Tag::All();
         $tagsId = $tags->pluck('id')->all();
+        $users = User::all();
+        $usersId = $users->pluck('id')->all();
 
         for( $i=0; $i<100; $i++ ){
             $post = new Post;
@@ -29,7 +32,7 @@ class PostSeeder extends Seeder
             $post->category_id = $faker->optional()->randomElement( $categoriesId );
 
             $randomTags = $faker->randomElements( $tagsId,$faker->numberBetween(1, 3));
-            
+            $post->user_id = $faker->randomElement($usersId);
             $post->save();
             
             $post->tags()->attach($randomTags);

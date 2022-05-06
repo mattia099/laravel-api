@@ -48,7 +48,7 @@
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td> 
                     <td>{{$post->slug}}</td> 
-                    <td>{{ $post->category ? $post->category->name : "-" }}</td>
+                    <td class="text-center">{{ $post->category ? $post->category->name : "-" }}</td>
                     <td>
                     @foreach ($post->tags as $tag )
                         <span class="badge rounded-pill bg-info text-light">{{ $tag->name }}</span>

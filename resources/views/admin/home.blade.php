@@ -15,7 +15,8 @@
                     @endif
 
                     <ul>
-                        <li><a href="{{ route('admin.posts.index') }}">Posts</a></li>
+                        <li><h3><a href="{{ route('admin.posts.index') }}">Posts</a></h3></li>
+                        <li><h3><a href="{{ route('admin.users.index') }}">Utenti registrati</a></h3></li>
                     </ul>
                 </div>
             </div>

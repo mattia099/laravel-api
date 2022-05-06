@@ -96,7 +96,7 @@ class PostController extends Controller
             'content' => 'required|string',
             'published_at' => 'nullable|date',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id',
+            'tags.*' => 'nullable|exists:tags,id',
         ]);
         
         $data = $request->all();
