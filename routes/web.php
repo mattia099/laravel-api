@@ -29,8 +29,12 @@ Route::middleware('auth')
         Route::resource('users','UserController');
 });
 
+Route::get('{any?}',function() {
+    return view('guest.home');
+})->where('any','.*');
 
-
-
+//Route::fallback(function(){    fallback fa la stessa cosa di sopra
+//    return view('guest.home');
+//});
 
 
