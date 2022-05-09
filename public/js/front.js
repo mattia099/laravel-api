@@ -1928,6 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1966,19 +1967,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      lastPage: 0,
+      currentPage: 1
     };
   },
   methods: {
     fetchPosts: function fetchPosts() {
       var _this = this;
 
-      axios.get('/api/posts').then(function (res) {
-        console.log(res.data.posts);
-        _this.posts = res.data.posts;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('/api/posts', {
+        params: {
+          page: page
+        }
+      }).then(function (res) {
+        console.log(res.data.posts.data);
+        _this.currentPage = res.data.posts.current_page;
+        _this.lastPage = res.data.posts.last_page;
+        console.log(_this.currentPage, _this.lastPage);
+        _this.posts = res.data.posts.data;
       })["catch"](function (err) {
         console.warn(err);
       });
@@ -2526,8 +2543,7 @@ var render = function () {
       _c(
         "div",
         {
-          staticClass:
-            "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ",
+          staticClass: "grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ",
         },
         _vm._l(_vm.posts, function (post) {
           return _c(
@@ -2537,9 +2553,7 @@ var render = function () {
               staticClass: "rounded bg-zinc-400 overflow-hidden",
             },
             [
-              _c("img", {
-                attrs: { src: "https://picsum.photos/300/200", alt: "" },
-              }),
+              _vm._m(0, true),
               _vm._v(" "),
               _c("div", { staticClass: "card-body p-4" }, [
                 _c("h4", { staticClass: "card_title text-2xl py-2" }, [
@@ -2577,9 +2591,44 @@ var render = function () {
         0
       ),
     ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container py-4" }, [
+      _c(
+        "ul",
+        { staticClass: "flex justify-center gap-6" },
+        _vm._l(_vm.lastPage, function (n) {
+          return _c(
+            "li",
+            {
+              key: n,
+              class: [
+                _vm.currentPage == n ? "bg-green-300" : "bg-white/30",
+                "dot cursor-pointer rounded-full h-10 w-10 flex items-center flex items-center justify-center text-white",
+              ],
+              on: {
+                click: function ($event) {
+                  return _vm.fetchPosts(n)
+                },
+              },
+            },
+            [_vm._v(_vm._s(n))]
+          )
+        }),
+        0
+      ),
+    ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("img", { attrs: { src: "https://picsum.photos/400/200", alt: "" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 

@@ -10,6 +10,7 @@
     </header>
     <main>
     <PostsGrid/>
+   
     </main>
     <footer class="p-4 bg-slate-800 text-white">
       Footer
