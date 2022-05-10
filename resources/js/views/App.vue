@@ -3,14 +3,15 @@
     <header class="p-4 bg-slate-800 text-white">
       <nav>
         <ul class="flex gap-4">
-          <li><a href="">Home</a></li>
-          <li><a href="">Posts</a></li>
+          <router-link to="/posts">Posts</router-link>
+          <router-link to="/contact">Contact</router-link>
         </ul>
       </nav>
     </header>
     <main>
-    <PostsGrid/>
-   
+
+    <router-view></router-view>
+
     </main>
     <footer class="p-4 bg-slate-800 text-white">
       Footer
@@ -20,11 +21,11 @@
 
 <script>
 
-import PostsGrid from './Posts.index.vue'
+
 
 export default {
   components : {
-    PostsGrid,
+    
   }
 }
 </script>
