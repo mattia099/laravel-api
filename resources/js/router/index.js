@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 import Posts from '../pages/Posts.vue'
 import Contact from '../pages/Contact.vue'
+import Post from '../pages/Post.vue'
+
 
 Vue.use(VueRouter)
 
@@ -12,9 +14,15 @@ const routes = [
     component : Posts,
   },
   {
+    path: '/posts/:slug',
+    name: 'posts.show',
+    component: Post,
+  },
+  {
     path: '/contact',
     component: Contact,
-  }
+  },
+  
 ]
 
 const router = new VueRouter({

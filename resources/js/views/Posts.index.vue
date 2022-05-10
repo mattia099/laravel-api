@@ -6,12 +6,13 @@
           <div class="card-header">
             <img class="" src="https://picsum.photos/400/200" alt="">
           </div>
-          <div class="card-body p-4">
+          <div class="card-body p-4 flex flex-col h-fit">
             <h4 class="card_title text-2xl py-2">{{post.title}}</h4>
             <p class="card_category text-amber-400 py-2" v-if="post.category">{{post.category.name}}</p>
             <ul class="flex flex-wrap gap-4 py-2">
               <li class="tag bg-green-400 rounded-full text-slate-100 px-3 py-1" v-for="tag in post.tags" :key="tag.id">{{tag.name}}</li>
             </ul>
+            <router-link tag="button" class="px-4 py-2 font-semibold text-sm bg-cyan-500 text-white rounded-lg shadow-sm justify-self-end" :to="{ name: 'posts.show', params: { slug : post.slug} }">Visualizza</router-link>
           </div>
         </div>
       </div>
