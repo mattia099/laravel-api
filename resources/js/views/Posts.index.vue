@@ -2,7 +2,7 @@
   <div class="bg-slate-700 py-8">
     <div class="container">
       <div class="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-        <div class="rounded bg-zinc-400 overflow-hidden" v-for="post in posts" :key="post.id">
+        <div class="rounded bg-zinc-400 overflow-hidden shadow-lg" v-for="post in posts" :key="post.id">
           <div class="card-header">
             <img class="" src="https://picsum.photos/400/200" alt="">
           </div>
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    fetchPosts(page=1){
+    fetchPosts(page=1){//default pagina 1 
       axios.get('/api/posts',{
         params: {
           page

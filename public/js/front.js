@@ -1986,6 +1986,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      //default pagina 1 
       axios.get('/api/posts', {
         params: {
           page: page
@@ -2550,7 +2551,7 @@ var render = function () {
             "div",
             {
               key: post.id,
-              staticClass: "rounded bg-zinc-400 overflow-hidden",
+              staticClass: "rounded bg-zinc-400 overflow-hidden shadow-lg",
             },
             [
               _vm._m(0, true),
