@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PostsGrid from '../views/Posts.index.vue'
+import PostsGrid from '../components/PostsGrid.vue'
 export default {
   components: {
     PostsGrid

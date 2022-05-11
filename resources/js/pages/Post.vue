@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-700">
+  <div class="bg-slate-700" v-if="loading">
     <img v-if="post" src="https://picsum.photos/1920/500" alt="">
     <div class="container">
       
@@ -18,19 +18,21 @@ export default {
   data(){
     return{
       post: null,
+      loading: false,
     }
   },
   mounted(){
-    console.log(this.$route)
+    
   },
   beforeMount(){
     axios.get(`/api/posts/${ this.$route.params.slug }`)
     .then ( res=>{
       const {post}  = res.data
       this.post = post;
+      this.loading = true;
     })
     .catch( err=>{
-      console.warn(err)
+      this.$router.push('/NotFound')
     })
   }
 }

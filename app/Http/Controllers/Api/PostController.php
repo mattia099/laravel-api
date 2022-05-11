@@ -54,7 +54,7 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::with(['category' , 'tags'])->where('slug',$slug)->first();
+        $post = Post::with(['category','tags'])->where('slug',$slug)->first();
 
         if ($post) {
             return response()->json([
@@ -64,7 +64,7 @@ class PostController extends Controller
         }
 
         return response()->json([
-            'message' => 'Post not fount',
+            'message' => 'Post not found',
             'success' => false,
         ],404);
     }
